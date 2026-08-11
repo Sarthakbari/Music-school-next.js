@@ -1,4 +1,6 @@
+
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -19,19 +21,23 @@ export const MenuItem = ({
   item,
   children,
 }: {
-  setActive: (item: string) => void;
+  setActive: (item: string | null) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div
+      onMouseEnter={() => setActive(item)}
+      className="relative"
+    >
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-black hover:opacity-[0.9] dark:text-white"
       >
         {item}
       </motion.p>
+
       {active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
@@ -42,11 +48,11 @@ export const MenuItem = ({
             <div className="absolute top-[calc(100%+1.7rem)] left-1/2 transform -translate-x-1/2">
               <motion.div
                 transition={transition}
-                layoutId="active" // layoutId ensures smooth animation
+                layoutId="active"
                 className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/20 dark:border-white/20 shadow-xl"
               >
                 <motion.div
-                  layout // layout ensures smooth animation
+                  layout
                   className="w-max h-full p-4"
                 >
                   {children}
@@ -69,8 +75,8 @@ export const Menu = ({
 }) => {
   return (
     <nav
-      onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full boder border-transparent dark:bg-black dark:border-white/20 bg-white shadow-input flex justify-center space-x-4 px-8 py-6 "
+      onMouseLeave={() => setActive(null)}
+      className="relative rounded-full border border-transparent dark:bg-black dark:border-white/20 bg-white shadow-input flex justify-center space-x-4 px-8 py-6"
     >
       {children}
     </nav>
@@ -97,10 +103,12 @@ export const ProductItem = ({
         alt={title}
         className="shrink-0 rounded-md shadow-2xl"
       />
+
       <div>
         <h4 className="text-xl font-bold mb-1 text-black dark:text-white">
           {title}
         </h4>
+
         <p className="text-neutral-700 text-sm max-w-40 dark:text-neutral-300">
           {description}
         </p>
@@ -109,11 +117,14 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ children, ...rest }: any) => {
+export const HoveredLink = ({
+  children,
+  ...rest
+}: React.ComponentProps<typeof Link>) => {
   return (
     <Link
       {...rest}
-      className="text-neutral-700 dark:text-neutral-200 hover:text-white "
+      className="text-neutral-700 dark:text-neutral-200 hover:text-white"
     >
       {children}
     </Link>
