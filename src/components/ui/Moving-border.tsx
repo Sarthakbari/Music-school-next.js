@@ -17,7 +17,7 @@ export function Button({
   as: Component = "button",
   containerClassName,
   borderClassName,
-  duration,
+  duration = 3000,
   className,
   ...otherProps
 }: {
@@ -33,38 +33,41 @@ export function Button({
   return (
     <Component
       className={cn(
-        "bg-transparent relative text-xl h-16 w-40 p-px overflow-hidden",
+        "relative h-16 w-40 overflow-hidden bg-transparent p-px",
         containerClassName
       )}
       style={{
-        borderRadius: borderRadius,
+        borderRadius,
       }}
       {...otherProps}
     >
+      {/* Moving border */}
       <div
         className="absolute inset-0"
         style={{
           borderRadius: `calc(${borderRadius} * 0.96)`,
         }}
       >
-        <MovingBorder duration={duration} rx="30%" ry="30%">
+        <MovingBorder
+          duration={duration}
+          rx="30%"
+          ry="30%"
+        >
           <div
             className={cn(
-              "h-20 w-20 opacity-[0.8] bg-[radial-gradient(var(--sky-500)_40%,transparent_60%)]",
+              "h-20 w-20 rounded-full bg-sky-400 opacity-80 blur-[2px]",
               borderClassName
             )}
           />
         </MovingBorder>
       </div>
 
+      {/* Button content */}
       <div
         className={cn(
-          "relative bg-slate-900/80 border border-slate-800 backdrop-blur-xl text-white flex items-center justify-center w-full h-full text-sm antialiased",
+          "relative flex h-full w-full items-center justify-center rounded-[inherit] border border-slate-800 bg-slate-900/90 text-sm text-white backdrop-blur-xl",
           className
         )}
-        style={{
-          borderRadius: `calc(${borderRadius} * 0.96)`,
-        }}
       >
         {children}
       </div>
@@ -75,8 +78,8 @@ export function Button({
 export const MovingBorder = ({
   children,
   duration = 2000,
-  rx,
-  ry,
+  rx = "30%",
+  ry = "30%",
   ...otherProps
 }: {
   children: React.ReactNode;
@@ -87,26 +90,37 @@ export const MovingBorder = ({
 }) => {
   const pathRef = useRef<SVGRectElement | null>(null);
 
-  const progress = useMotionValue<number>(0);
+  const progress = useMotionValue(0);
 
   useAnimationFrame((time) => {
-    const length = pathRef.current?.getTotalLength();
+    const path = pathRef.current;
 
-    if (length) {
-      const pxPerMillisecond = length / duration;
-      progress.set((time * pxPerMillisecond) % length);
-    }
+    if (!path) return;
+
+    const length = path.getTotalLength();
+
+    if (length === 0) return;
+
+    const progressValue = (time * length) / duration;
+
+    progress.set(progressValue % length);
   });
 
-  const x = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).x ?? 0
-  );
+  const x = useTransform(progress, (value) => {
+    const path = pathRef.current;
 
-  const y = useTransform(
-    progress,
-    (val) => pathRef.current?.getPointAtLength(val).y ?? 0
-  );
+    if (!path) return 0;
+
+    return path.getPointAtLength(value).x;
+  });
+
+  const y = useTransform(progress, (value) => {
+    const path = pathRef.current;
+
+    if (!path) return 0;
+
+    return path.getPointAtLength(value).y;
+  });
 
   const transform = useMotionTemplate`
     translateX(${x}px)
@@ -118,20 +132,20 @@ export const MovingBorder = ({
   return (
     <>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        className="absolute h-full w-full"
+        className="absolute inset-0 h-full w-full"
         width="100%"
         height="100%"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
         {...otherProps}
       >
         <rect
-          fill="none"
+          ref={pathRef}
           width="100%"
           height="100%"
           rx={rx}
           ry={ry}
-          ref={pathRef}
+          fill="none"
         />
       </svg>
 
@@ -140,7 +154,6 @@ export const MovingBorder = ({
           position: "absolute",
           top: 0,
           left: 0,
-          display: "inline-block",
           transform,
         }}
       >
