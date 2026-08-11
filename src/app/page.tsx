@@ -1,9 +1,5 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-red-700">
-      <h1 className="text-5xl font-bold text-white">
-        Tailwind is Working!
-      </h1>
-    </main>
+    <h1 className="text-center text-3xl text-blue-500">Hello World</h1>
   );
 }
