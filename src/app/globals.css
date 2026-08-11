@@ -41,3 +41,14 @@ body {
 .sticky-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration)
+    var(--animation-direction) linear infinite;
+}

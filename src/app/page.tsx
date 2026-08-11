@@ -1,5 +1,7 @@
 import Featured from "@/components/Featured";
 import HeroSection from "@/components/HeroSection";
+import MusicSchoolTestimonialCard from "@/components/TestimonialCards";
+import TestimonialCards from "@/components/TestimonialCards";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { main } from "framer-motion/client";
 
@@ -9,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <Featured />
       <WhyChooseUs />
+      <MusicSchoolTestimonialCard />
     </main>
   );
 }
