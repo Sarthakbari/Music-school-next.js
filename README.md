@@ -1,9 +1,9 @@
 
-\# 🎵 Music School — Next.js
+# 🎵 Music School — Next.js
 
-\> A modern and responsive Music School website built with Next.js, React, Tailwind CSS, and Aceternity UI, with a strong focus on UI design, reusable components, routing, animations, and frontend development.
+> A modern and responsive Music School website built with Next.js, React, Tailwind CSS, and Aceternity UI, with a strong focus on UI design, reusable components, routing, animations, and frontend development.
 
-\`\`\`bash
+```bash
 npm run dev
 \# or
 yarn dev
@@ -11,9 +11,9 @@ yarn dev
 pnpm dev
 \# or
 bun dev
-\`\`\`
+```
 
-\<div align="center">
+<div align="center">
 
 ![Next.js]\([https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white](https://img.shields.io/badge/Next.js-000000?style=for-the-badge\&logo=next.js\&logoColor=white))
 ![React]\([https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black](https://img.shields.io/badge/React-61DAFB?style=for-the-badge\&logo=react\&logoColor=black))
@@ -21,19 +21,19 @@ bun dev
 ![Aceternity UI]\([https://img.shields.io/badge/Aceternity\_UI-8B5CF6?style=for-the-badge](https://img.shields.io/badge/Aceternity_UI-8B5CF6?style=for-the-badge))
 ![Vercel]\([https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white](https://img.shields.io/badge/Vercel-000000?style=for-the-badge\&logo=vercel\&logoColor=white))
 
-\<br>
+<br>
 
-\### 🚀 Live Project
+### 🚀 Live Project
 
-[\*\*🎵 Visit Music School →\*\*]\([https://music-school-next-js-pearl.vercel.app/](https://music-school-next-js-pearl.vercel.app/))
+[**🎵 Visit Music School →\*\*]\([https://music-school-next-js-pearl.vercel.app/](https://music-school-next-js-pearl.vercel.app/))
 
-\</div>
+</div>
 
-\---
+---
 
-\## 📖 About The Project
+## 📖 About The Project
 
-\*\*Music School\*\* is a modern frontend website developed using \*\*Next.js and React\*\*.
+**Music School** is a modern frontend website developed using **Next.js and React\*\*.
 
 The primary focus of this project was to practice and improve my skills in \*\*UI development, component design, responsive layouts, page routing, and modern frontend architecture\*\*.
 
